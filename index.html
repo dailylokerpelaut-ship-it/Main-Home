@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Loker Pelaut — Komunitas Pelaut Indonesia</title>
+<title>Daily Loker Pelaut 🇮🇩 — Komunitas Pelaut Indonesia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -31,7 +31,7 @@
   --trakteer:#e74c3c;
 }
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--foam);color:var(--ink);line-height:1.7;overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans', sans-serif;background:var(--foam);color:var(--ink);line-height:1.7;overflow-x:hidden}
 
 /* ── NOISE TEXTURE OVERLAY ── */
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
@@ -176,8 +176,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,251,249,
 .kontak-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:48px}
 .kontak-left p{font-size:15px;color:var(--ink2);line-height:1.9;margin-bottom:24px}
 .kontak-cards{display:flex;flex-direction:column;gap:14px}
-.kontak-card{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:var(--foam);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:all .2s}
-.kontak-card:hover{border-color:var(--sea2);background:#f0f8ff;transform:translateX(4px)}
+.kontak-card{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:#ffffff;border:1.5px solid #d0e8f0;border-radius:14px;text-decoration:none;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+.kontak-card:hover{border-color:#0096c7;background:#f0f8ff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,119,182,0.15)}
 .kc-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
 .kc-email{background:#e8f4ff}
 .kc-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
@@ -257,6 +257,67 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
 }
 
 /* ── SCROLL ANIMATIONS ── */
+
+/* ── NUANSA INDONESIA ── */
+.indonesia-text {
+  background: linear-gradient(135deg, #CE1126 50%, #ffffff 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+.merah { color: #CE1126; font-weight: 700; }
+.indonesia-badge {
+  background: linear-gradient(135deg, #CE1126, #DC143C);
+  color: #ffffff;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.indonesia-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #CE1126 50%, #ffffff 50%);
+  border-radius: 2px;
+  margin: 8px 0;
+}
+.flag-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Fraunces untuk headline */
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+}
+/* Plus Jakarta Sans untuk body */
+body, p, span, a, button, input, textarea {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.kontak-card, .kontak-card:hover, .kontak-card:visited, .kontak-card:active {
+  text-decoration: none !important;
+  color: inherit !important;
+  border-bottom: none !important;
+  outline: none !important;
+}
+.kontak-card .kc-value {
+  color: #0d0d0d;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+.kontak-card .kc-note {
+  color: #666;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.hero h1 em, .hero h1 span {
+  font-style: normal !important;
+}
 </style>
 </head>
 <body>
@@ -268,7 +329,7 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
       <div class="nav-logo-icon">
         <svg viewBox="0 0 24 24"><path d="M3 13.5C3 8.806 6.806 5 11.5 5S20 8.806 20 13.5c0 1.47-.372 2.851-1.026 4.058L21 19.5l-2.5.5-.5 2.5-2-1.974A8.46 8.46 0 0111.5 22C6.806 22 3 18.194 3 13.5z"/></svg>
       </div>
-      <div class="nav-logo-text">Daily Loker Pelaut<span>Komunitas Pelaut Indonesia</span></div>
+      <div class="nav-logo-text">Daily Loker Pelaut 🇮🇩<span>Komunitas Pelaut Indonesia</span></div>
     </a>
     <div class="nav-links">
       <a href="#beranda">Beranda</a>
@@ -281,7 +342,7 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
       <span></span><span></span><span></span>
     </button>
   </div>
-</nav>
+</nav><div class="indonesia-bar" style="max-width:100%;margin:0;border-radius:0;height:3px;background:linear-gradient(90deg,#CE1126 50%,#ffffff 50%)"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="#beranda" onclick="closeMenu()">Beranda</a>
   <a href="#tentang" onclick="closeMenu()">Tentang Kami</a>
@@ -303,10 +364,10 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
     <div class="hero-left">
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
-        <span>Komunitas Aktif · Pelaut Indonesia</span>
+        <span>Komunitas Aktif · Pelaut <span class="merah">Indonesia 🇮🇩</span></span>
       </div>
-      <h1>Satu tempat untuk semua kebutuhan <em>pelaut Indonesia</em></h1>
-      <p class="hero-sub">Dari info lowongan harian, buku panduan interview, hingga komunitas yang saling mendukung — <strong>Daily Loker Pelaut</strong> hadir untuk membantu karir pelaut Indonesia berkembang.</p>
+      <h1>Satu tempat untuk semua kebutuhan <span style="color:#CE1126;font-style:normal;font-weight:inherit">Pelaut Indonesia</span></h1>
+      <p class="hero-sub">Dari info lowongan harian, buku panduan interview, hingga komunitas yang saling mendukung — <strong>Daily Loker Pelaut 🇮🇩</strong> hadir untuk membantu karir pelaut <span class="merah">Indonesia</span> berkembang.</p>
       <div class="hero-stats">
         <div class="hstat"><div class="hstat-num">100<span>K+</span></div><div class="hstat-label">Followers WA Channel</div></div>
         <div class="hstat"><div class="hstat-num">400<span>+</span></div><div class="hstat-label">Buku terjual</div></div>
@@ -385,11 +446,11 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
         <div class="sec-eyebrow"><div class="eyebrow-dash"></div><div class="eyebrow-txt">Tentang Kami</div></div>
         <h2>Lebih dari sekadar kanal lowongan</h2>
         <p>Daily Loker Pelaut lahir dari satu kegelisahan — betapa sulitnya pelaut Indonesia menemukan wadah yang benar-benar bisa menyatukan dan memberdayakan mereka. Kami melihat banyak pelaut berbakat yang kesulitan bukan karena tidak kompeten, tapi karena tidak tahu caranya.</p>
-        <p>Sejak Juni 2024, kami telah berkembang menjadi komunitas pelaut terbesar di Indonesia dengan lebih dari 100.000 pengikut — 98% pelaut Indonesia, dari Sabang sampai Merauke.</p>
+        <p>Sejak Juni 2024, kami telah berkembang menjadi komunitas pelaut terbesar di <span class="merah">Indonesia</span> dengan lebih dari 100.000 pengikut — 98% pelaut Indonesia, dari Sabang sampai Merauke.</p>
         <p>Misi kami satu: <strong>membantu setiap pelaut Indonesia punya kesempatan yang sama untuk sukses di industri maritim global.</strong></p>
         <div class="tentang-tag-row">
           <span class="tentang-tag">100K+ Followers</span>
-          <span class="tentang-tag">98% Pelaut Indonesia</span>
+          <span class="tentang-tag">98% Pelaut <span class="merah">Indonesia</span></span>
           <span class="tentang-tag">Berdiri 2024</span>
           <span class="tentang-tag">Aktif Setiap Hari</span>
         </div>
@@ -403,7 +464,7 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
   <div class="wrap">
     <div class="sec-eyebrow"><div class="eyebrow-dash"></div><div class="eyebrow-txt">Produk Kami</div></div>
     <h2 >Buku panduan yang sudah terbukti</h2>
-    <p class="sec-lead">Ditulis dari perspektif industri rekrutmen maritim — bukan teori, tapi panduan nyata yang membantu pelaut Indonesia lolos interview.</p>
+    <p class="sec-lead">Bukan dari buku teks. Ditulis dari ribuan percakapan nyata dengan pelaut Indonesia — dan pola yang selalu muncul dari yang berhasil.</p>
     <div class="buku-grid">
       <div class="buku-card">
         <div class="buku-card-top">
@@ -499,21 +560,14 @@ footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,2
         <p>Untuk pelaut yang membutuhkan bantuan seputar karir, lowongan, atau produk kami — silakan kirim pesan melalui form atau langsung via email.</p>
         <div class="kontak-cards">
           <a href="mailto:dailylokerpelaut@gmail.com" class="kontak-card">
-            <div class="kc-icon kc-email">✉️</div>
+            <div class="kc-icon kc-email" style="background:#fff3ef;border-radius:10px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📧</div>
             <div>
-              <div class="kc-label">Email Umum</div>
-              <div class="kc-value">dailylokerpelaut@gmail.com</div>
-              <div class="kc-note">Untuk pertanyaan umum, pembelian buku, dan komunitas</div>
+              <div class="kc-label" style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0077b6;margin-bottom:4px">Email &amp; Semua Kebutuhan</div>
+              <div class="kc-value" style="font-size:15px;font-weight:700;color:#0d0d0d">dailylokerpelaut@gmail.com</div>
+              <div class="kc-note" style="font-size:13px;color:#666;margin-top:3px">Untuk pembelian buku, kerjasama, loker, dan komunitas</div>
             </div>
           </a>
-          <a href="mailto:dailylokerpelaut@gmail.com" class="kontak-card">
-            <div class="kc-icon kc-email">🤝</div>
-            <div>
-              <div class="kc-label">Kerjasama & Loker</div>
-              <div class="kc-value">dailylokerpelaut@gmail.com</div>
-              <div class="kc-note">Untuk manning agency & crewing yang ingin kirim loker atau berkolaborasi</div>
-            </div>
-          </a>
+          
         </div>
       </div>
       <div >
@@ -614,7 +668,7 @@ const obs=new IntersectionObserver((entries)=>{
 },{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('const subject=encodeURIComponent('['+keperluan+'] dari '+nama);
   const body=encodeURIComponent('Nama: '+nama+'\nEmail: '+email+'\nKeperluan: '+keperluan+'\n\nPesan:\n'+pesan);
-  window.location.href='mailto:dailylokerpelaut@gmail.com?subject='+subject+'&body='+body;
+  window.location.href='mailto:dailylokerpelaut@gmail.com
   const btn=e.target;
   btn.textContent='✓ Membuka aplikasi email...';
   btn.style.background='var(--green)';
