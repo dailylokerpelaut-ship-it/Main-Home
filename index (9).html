@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Loker Pelaut — Komunitas Pelaut Indonesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0e1a12;
+  --ink2:#2d4a35;
+  --ink3:#5a7a62;
+  --sea:#0077b6;
+  --sea2:#0096c7;
+  --sea3:#caf0f8;
+  --wave:#48cae4;
+  --sand:#f4e9d0;
+  --sand2:#e8d5b0;
+  --foam:#f8fbf9;
+  --white:#ffffff;
+  --green:#1a6040;
+  --green2:#2d8653;
+  --green-light:#e8f5ec;
+  --gold:#b5860d;
+  --gold2:#d4a017;
+  --gold-light:#fdf6e3;
+  --border:#d4e2d8;
+  --wa:#25d366;
+  --trakteer:#e74c3c;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--foam);color:var(--ink);line-height:1.7;overflow-x:hidden}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,251,249,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,226,216,0.6);padding:0 24px;transition:all .3s}
+.nav-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-icon{width:36px;height:36px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-icon svg{width:20px;height:20px;fill:var(--wave)}
+.nav-logo-text{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--ink);line-height:1.2}
+.nav-logo-text span{display:block;font-size:10px;font-weight:400;color:var(--ink3);letter-spacing:.5px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--ink2);padding:7px 14px;border-radius:8px;text-decoration:none;transition:all .2s}
+.nav-links a:hover{background:var(--green-light);color:var(--green)}
+.nav-cta{background:var(--ink);color:var(--white)!important;border-radius:8px!important;padding:8px 18px!important;font-size:13px!important;font-weight:600!important;letter-spacing:.2px}
+.nav-cta:hover{background:var(--green)!important;color:var(--white)!important}
+.nav-ham{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--ink);margin:4px 0;transition:all .3s;border-radius:2px}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding-top:64px}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(155deg,#0e1a12 0%,#0d2b1e 45%,#0a1f30 100%);z-index:0}
+.hero-wave{position:absolute;bottom:0;left:0;right:0;z-index:1}
+.hero-wave svg{display:block;width:100%;height:auto}
+.hero-dots{position:absolute;inset:0;z-index:1;background-image:radial-gradient(circle,rgba(72,202,228,0.15) 1px,transparent 1px);background-size:40px 40px;animation:dotmove 20s linear infinite}
+@keyframes dotmove{0%{background-position:0 0}100%{background-position:40px 40px}}
+.hero-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:80px 24px 160px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(72,202,228,0.12);border:1px solid rgba(72,202,228,0.25);border-radius:30px;padding:6px 14px 6px 10px;margin-bottom:24px}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--wave);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-badge span{font-size:12px;font-weight:500;color:rgba(72,202,228,0.9);letter-spacing:.3px}
+.hero h1{font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:var(--white);line-height:1.1;margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--wave)}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:36px;max-width:460px}
+.hero-sub strong{color:rgba(255,255,255,0.85);font-weight:500}
+.hero-stats{display:flex;gap:32px;margin-bottom:40px}
+.hstat{text-align:left}
+.hstat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--white);line-height:1}
+.hstat-num span{color:var(--wave)}
+.hstat-label{font-size:12px;color:rgba(255,255,255,0.4);margin-top:3px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--wave);color:var(--ink);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px 24px;border-radius:10px;text-decoration:none;transition:all .25s;letter-spacing:.2px}
+.btn-primary:hover{background:#6dd8ea;transform:translateY(-2px);box-shadow:0 8px 24px rgba(72,202,228,0.35)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.75);font-size:14px;font-weight:500;padding:14px 22px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:all .25s}
+.btn-secondary:hover{background:rgba(255,255,255,0.12);color:var(--white);border-color:rgba(255,255,255,0.3)}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-card-wrap{position:relative}
+.hero-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:28px;width:320px;backdrop-filter:blur(10px)}
+.hc-tag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--wave);margin-bottom:14px}
+.hc-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.hc-item:last-child{border:none;padding-bottom:0}
+.hc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.hc-label{font-size:13px;font-weight:500;color:rgba(255,255,255,0.8)}
+.hc-sub{font-size:11px;color:rgba(255,255,255,0.35);margin-top:1px}
+.hero-float{position:absolute;background:var(--ink);border:1px solid rgba(72,202,228,0.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.hero-float-1{top:-20px;right:-30px}
+.hero-float-2{bottom:20px;left:-30px}
+.hf-num{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--wave)}
+.hf-txt{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.3}
+
+/* ── SECTION COMMONS ── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.sec{padding:80px 0;position:relative}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.eyebrow-dash{width:20px;height:2px;background:var(--sea2)}
+.eyebrow-txt{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sea2)}
+.sec h2{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--ink);line-height:1.2;margin-bottom:14px}
+.sec-lead{font-size:16px;color:var(--ink3);line-height:1.8;max-width:560px}
+
+/* ── TENTANG ── */
+#tentang{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tentang-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.tentang-visual{position:relative}
+.tentang-box{background:linear-gradient(135deg,var(--ink) 0%,var(--ink2) 100%);border-radius:20px;padding:36px;color:var(--white)}
+.tb-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(72,202,228,0.7);margin-bottom:20px}
+.tb-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.tb-item:last-child{border:none;padding-bottom:0}
+.tb-icon{width:40px;height:40px;background:rgba(72,202,228,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.tb-text{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6}
+.tb-text strong{color:var(--white);font-weight:600;display:block;margin-bottom:2px}
+.tentang-accent{position:absolute;bottom:-16px;right:-16px;background:var(--wave);border-radius:12px;padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ink)}
+.tentang-text p{font-size:15px;color:var(--ink2);line-height:1.9;margin-bottom:16px}
+.tentang-text p:last-child{margin-bottom:0}
+.tentang-tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tentang-tag{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;background:var(--green-light);color:var(--green);border:1px solid rgba(26,96,64,0.15)}
+
+/* ── BUKU ── */
+#buku{background:var(--foam)}
+.buku-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+.buku-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;position:relative}
+.buku-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(14,26,18,0.1);border-color:var(--sea2)}
+.buku-card-top{padding:28px 28px 0}
+.buku-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:16px}
+.pill-available{background:var(--green-light);color:var(--green)}
+.pill-soon{background:var(--gold-light);color:var(--gold)}
+.buku-num{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.buku-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--ink);line-height:1.2;margin-bottom:10px}
+.buku-desc{font-size:13.5px;color:var(--ink3);line-height:1.7;margin-bottom:20px}
+.buku-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.btag{font-size:11px;padding:3px 10px;border-radius:8px;background:var(--foam);color:var(--ink3);border:1px solid var(--border)}
+.buku-card-bottom{padding:18px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--foam)}
+.buku-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--ink)}
+.buku-price span{font-size:12px;font-weight:400;color:var(--ink3);font-family:'DM Sans',sans-serif}
+.btn-buku{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--white);font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;text-decoration:none;transition:all .2s}
+.btn-buku:hover{background:var(--sea)}
+.btn-buku-soft{background:var(--foam);color:var(--ink3);border:1px solid var(--border)}
+.btn-buku-soft:hover{background:var(--gold-light);color:var(--gold);border-color:var(--gold2)}
+
+/* ── KOMUNITAS ── */
+#komunitas{background:var(--ink);overflow:hidden;position:relative}
+#komunitas::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(72,202,228,0.08) 0%,transparent 70%);pointer-events:none}
+.kom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.kom-card{border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden}
+.kom-card:hover{transform:translateY(-4px)}
+.kom-wa{background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2)}
+.kom-wa:hover{border-color:rgba(37,211,102,0.5);background:rgba(37,211,102,0.12)}
+.kom-trakteer{background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.2)}
+.kom-trakteer:hover{border-color:rgba(231,76,60,0.5);background:rgba(231,76,60,0.12)}
+.kom-survey{background:rgba(72,202,228,0.08);border:1px solid rgba(72,202,228,0.2)}
+.kom-survey:hover{border-color:rgba(72,202,228,0.5);background:rgba(72,202,228,0.12)}
+.kom-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:24px}
+.icon-wa{background:rgba(37,211,102,0.15)}
+.icon-tr{background:rgba(231,76,60,0.15)}
+.icon-sv{background:rgba(72,202,228,0.15)}
+.kom-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px}
+.kom-desc{font-size:13.5px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:22px}
+.kom-stat{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:18px}
+.stat-wa{color:var(--wa)}
+.stat-tr{color:#e74c3c}
+.stat-sv{color:var(--wave)}
+.btn-kom{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:10px 18px;border-radius:8px;text-decoration:none;transition:all .2s;width:100%;justify-content:center}
+.btn-wa{background:var(--wa);color:var(--white)}
+.btn-wa:hover{background:#1fb555}
+.btn-tr{background:#e74c3c;color:var(--white)}
+.btn-tr:hover{background:#c0392b}
+.btn-sv{background:var(--wave);color:var(--ink)}
+.btn-sv:hover{background:#6dd8ea}
+
+/* ── KONTAK ── */
+#kontak{background:var(--white);border-top:1px solid var(--border)}
+.kontak-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:48px}
+.kontak-left p{font-size:15px;color:var(--ink2);line-height:1.9;margin-bottom:24px}
+.kontak-cards{display:flex;flex-direction:column;gap:14px}
+.kontak-card{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:var(--foam);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:all .2s}
+.kontak-card:hover{border-color:var(--sea2);background:#f0f8ff;transform:translateX(4px)}
+.kc-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.kc-email{background:#e8f4ff}
+.kc-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.kc-value{font-size:14px;font-weight:600;color:var(--ink)}
+.kc-note{font-size:12px;color:var(--ink3);margin-top:2px;line-height:1.5}
+.kontak-form{background:var(--foam);border:1px solid var(--border);border-radius:16px;padding:32px}
+.kontak-form h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.kontak-form p{font-size:13px;color:var(--ink3);margin-bottom:24px;line-height:1.6}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:6px;letter-spacing:.3px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);transition:border-color .2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--sea2);box-shadow:0 0 0 3px rgba(0,150,199,0.08)}
+.form-group textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form-group select{cursor:pointer}
+.btn-submit{width:100%;background:var(--ink);color:var(--white);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px 24px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.2px;margin-top:6px}
+.btn-submit:hover{background:var(--sea)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:40px 0 24px;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-in{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+.footer-logo{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--wave)}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--wave)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2)}
+
+/* ── MOBILE NAV DRAWER ── */
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--foam);border-bottom:1px solid var(--border);z-index:99;padding:16px 24px 24px;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:15px;font-weight:500;color:var(--ink2);padding:11px 14px;border-radius:8px;text-decoration:none;transition:all .2s}
+.mobile-menu a:hover{background:var(--green-light);color:var(--green)}
+.mobile-menu .nav-cta{background:var(--ink);color:var(--white)!important;text-align:center;margin-top:6px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-ham{display:block}
+  .hero h1{font-size:30px}
+  .hero-content{grid-template-columns:1fr;gap:32px;padding:48px 20px 100px}
+  .hero-visual{display:none}
+  .hero-float{display:none}
+  .hero-stats{gap:16px;flex-wrap:wrap}
+  .hstat-num{font-size:22px}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-secondary{justify-content:center;width:100%}
+  .sec{padding:52px 0}
+  .sec h2{font-size:26px}
+  .sec-lead{font-size:14px}
+  .wrap{padding:0 18px}
+  .tentang-grid,.kontak-grid{grid-template-columns:1fr;gap:32px}
+  .tentang-box{padding:24px}
+  .tentang-accent{display:none}
+  .buku-grid{grid-template-columns:1fr}
+  .buku-card-top{padding:20px 20px 0}
+  .buku-card-bottom{padding:14px 20px}
+  .buku-title{font-size:19px}
+  .kom-grid{grid-template-columns:1fr}
+  .kom-card{padding:22px}
+  .kontak-form{padding:22px}
+  .rank-grid{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .footer-links{gap:14px}
+  .footer-links a{font-size:12px}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:26px}
+  .hero-badge span{font-size:10px}
+  .hstat-num{font-size:20px}
+  .hstat-label{font-size:10px}
+  .hero-stats{gap:12px}
+  .sec h2{font-size:22px}
+  .buku-title{font-size:17px}
+  .kontak-card{padding:14px}
+  .kc-value{font-size:13px}
+}
+
+/* ── SCROLL ANIMATIONS ── */
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 13.5C3 8.806 6.806 5 11.5 5S20 8.806 20 13.5c0 1.47-.372 2.851-1.026 4.058L21 19.5l-2.5.5-.5 2.5-2-1.974A8.46 8.46 0 0111.5 22C6.806 22 3 18.194 3 13.5z"/></svg>
+      </div>
+      <div class="nav-logo-text">Daily Loker Pelaut<span>Komunitas Pelaut Indonesia</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#beranda">Beranda</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#buku">Buku</a>
+      <a href="#komunitas">Komunitas</a>
+      <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+    </div>
+    <button class="nav-ham" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#beranda" onclick="closeMenu()">Beranda</a>
+  <a href="#tentang" onclick="closeMenu()">Tentang Kami</a>
+  <a href="#buku" onclick="closeMenu()">Buku</a>
+  <a href="#komunitas" onclick="closeMenu()">Komunitas</a>
+  <a href="#kontak" class="nav-cta" onclick="closeMenu()">Hubungi Kami</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="beranda">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f8fbf9"/>
+    </svg>
+  </div>
+  <div class="hero-content wrap">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>Komunitas Aktif · Pelaut Indonesia</span>
+      </div>
+      <h1>Satu tempat untuk semua kebutuhan <em>pelaut Indonesia</em></h1>
+      <p class="hero-sub">Dari info lowongan harian, buku panduan interview, hingga komunitas yang saling mendukung — <strong>Daily Loker Pelaut</strong> hadir untuk membantu karir pelaut Indonesia berkembang.</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-num">100<span>K+</span></div><div class="hstat-label">Followers WA Channel</div></div>
+        <div class="hstat"><div class="hstat-num">400<span>+</span></div><div class="hstat-label">Buku terjual</div></div>
+        <div class="hstat"><div class="hstat-num">2</div><div class="hstat-label">Buku tersedia</div></div>
+      </div>
+      <div class="hero-btns">
+        <a href="#komunitas" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Gabung Komunitas
+        </a>
+        <a href="#buku" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Lihat Buku
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="hc-tag">Yang kami sediakan</div>
+          <div class="hc-item">
+            <div class="hc-icon" style="background:rgba(37,211,102,0.15)">📢</div>
+            <div><div class="hc-label">Info Loker Harian</div><div class="hc-sub">Kapal lokal & internasional</div></div>
+          </div>
+          <div class="hc-item">
+            <div class="hc-icon" style="background:rgba(72,202,228,0.15)">📚</div>
+            <div><div class="hc-label">Buku Panduan Interview</div><div class="hc-sub">Semua departemen · Bilingual</div></div>
+          </div>
+          <div class="hc-item">
+            <div class="hc-icon" style="background:rgba(255,200,80,0.15)">🎯</div>
+            <div><div class="hc-label">Quiz & Wawasan Karir</div><div class="hc-sub">Update setiap hari</div></div>
+          </div>
+          <div class="hc-item">
+            <div class="hc-icon" style="background:rgba(200,100,255,0.15)">🤝</div>
+            <div><div class="hc-label">Kolaborasi Perusahaan</div><div class="hc-sub">Manning agency & crewing</div></div>
+          </div>
+        </div>
+        <div class="hero-float hero-float-1">
+          <div><div class="hf-num">100K</div><div class="hf-txt">Pelaut aktif<br>di channel kami</div></div>
+        </div>
+        <div class="hero-float hero-float-2">
+          <div><div class="hf-num">#1</div><div class="hf-txt">Komunitas pelaut<br>terbesar Indonesia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TENTANG ── -->
+<section class="sec" id="tentang">
+  <div class="wrap">
+    <div class="tentang-grid">
+      <div class="tentang-visual">
+        <div class="tentang-box">
+          <div class="tb-label">Apa yang kami lakukan setiap hari</div>
+          <div class="tb-item">
+            <div class="tb-icon">📋</div>
+            <div class="tb-text"><strong>Info Lowongan Terkini</strong>Kapal lokal dan internasional — dari berbagai jenis dan ukuran kapal</div>
+          </div>
+          <div class="tb-item">
+            <div class="tb-icon">🧩</div>
+            <div class="tb-text"><strong>Quiz Interaktif</strong>Uji kemampuan teknis dan persiapkan diri untuk interview dan assessment</div>
+          </div>
+          <div class="tb-item">
+            <div class="tb-icon">💡</div>
+            <div class="tb-text"><strong>Insight Karir</strong>Tips, strategi, dan wawasan untuk membantu pelaut Indonesia berkembang</div>
+          </div>
+          <div class="tb-item">
+            <div class="tb-icon">📦</div>
+            <div class="tb-text"><strong>Produk Edukasi</strong>Buku panduan interview yang sudah membantu 400+ pelaut lolos seleksi</div>
+          </div>
+        </div>
+        <div class="tentang-accent">Berdiri sejak Juni 2024 🚢</div>
+      </div>
+      <div class="tentang-text">
+        <div class="sec-eyebrow"><div class="eyebrow-dash"></div><div class="eyebrow-txt">Tentang Kami</div></div>
+        <h2>Lebih dari sekadar kanal lowongan</h2>
+        <p>Daily Loker Pelaut lahir dari satu kegelisahan — betapa sulitnya pelaut Indonesia menemukan wadah yang benar-benar bisa menyatukan dan memberdayakan mereka. Kami melihat banyak pelaut berbakat yang kesulitan bukan karena tidak kompeten, tapi karena tidak tahu caranya.</p>
+        <p>Sejak Juni 2024, kami telah berkembang menjadi komunitas pelaut terbesar di Indonesia dengan lebih dari 100.000 pengikut — 98% pelaut Indonesia, dari Sabang sampai Merauke.</p>
+        <p>Misi kami satu: <strong>membantu setiap pelaut Indonesia punya kesempatan yang sama untuk sukses di industri maritim global.</strong></p>
+        <div class="tentang-tag-row">
+          <span class="tentang-tag">100K+ Followers</span>
+          <span class="tentang-tag">98% Pelaut Indonesia</span>
+          <span class="tentang-tag">Berdiri 2024</span>
+          <span class="tentang-tag">Aktif Setiap Hari</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BUKU ── -->
+<section class="sec" id="buku">
+  <div class="wrap">
+    <div class="sec-eyebrow"><div class="eyebrow-dash"></div><div class="eyebrow-txt">Produk Kami</div></div>
+    <h2 >Buku panduan yang sudah terbukti</h2>
+    <p class="sec-lead">Ditulis dari perspektif industri rekrutmen maritim — bukan teori, tapi panduan nyata yang membantu pelaut Indonesia lolos interview.</p>
+    <div class="buku-grid">
+      <div class="buku-card">
+        <div class="buku-card-top">
+          <span class="buku-pill pill-available">✦ Tersedia Sekarang</span>
+          <div class="buku-num">Buku Pertama</div>
+          <div class="buku-title">Interview Mastery untuk Pelaut</div>
+          <div class="buku-desc">Panduan lengkap lolos interview untuk semua departemen — Deck, Engine, Galley, hingga Rating. Bilingual Indonesia & English dengan metode STAR dan PREP yang sudah terbukti.</div>
+          <div class="buku-tags">
+            <span class="btag">Semua Departemen</span>
+            <span class="btag">Bilingual</span>
+            <span class="btag">Metode STAR & PREP</span>
+            <span class="btag">400+ Terjual</span>
+          </div>
+        </div>
+        <div class="buku-card-bottom" style="justify-content:space-between">
+          <div class="buku-price">Rp 179.000<span></span></div>
+          <a href="https://lynk.id/dailylokerpelautmerchandise" target="_blank" class="btn-buku">
+            Beli Sekarang <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="buku-card">
+        <div class="buku-card-top">
+          <span class="buku-pill pill-soon">⏳ Pre-Order</span>
+          <div class="buku-num">Buku Kedua</div>
+          <div class="buku-title">Interview Mastery untuk Marine Engineer</div>
+          <div class="buku-desc">Panduan spesifik untuk Marine Engineer — dari Junior Engineer hingga 2nd Engineer, lengkap dengan persiapan naik ke Chief Engineer. Konten teknis terverifikasi oleh praktisi aktif.</div>
+          <div class="buku-tags">
+            <span class="btag">Khusus Engine Dept</span>
+            <span class="btag">Per Rank / Jabatan</span>
+            <span class="btag">COC Oral Exam</span>
+            <span class="btag">Technical Reviewer</span>
+          </div>
+        </div>
+        <div class="buku-card-bottom" style="justify-content:space-between">
+          <div class="buku-price">Rp 199.000<span> pre-order</span></div>
+          <a href="https://lynk.id/dailylokerpelautmerchandise" target="_blank" class="btn-buku">
+            Pre-Order <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KOMUNITAS ── -->
+<section class="sec" id="komunitas">
+  <div class="wrap">
+    <div class="sec-eyebrow"><div class="eyebrow-dash" style="background:rgba(72,202,228,0.6)"></div><div class="eyebrow-txt" style="color:rgba(72,202,228,0.8)">Komunitas & Dukungan</div></div>
+    <h2  style="color:var(--white)">Bergabung dengan kami</h2>
+    <p class="sec-lead" style="color:rgba(255,255,255,0.5)">Jadilah bagian dari komunitas pelaut Indonesia terbesar. Dapatkan info lowongan, ikut survey, dan dukung pertumbuhan kami.</p>
+    <div class="kom-grid">
+      <div class="kom-card kom-wa">
+        <div class="kom-icon icon-wa">📱</div>
+        <div class="kom-title">WhatsApp Channel</div>
+        <div class="kom-desc">Info lowongan harian, quiz interaktif, dan wawasan karir untuk pelaut Indonesia — langsung di WhatsApp kamu.</div>
+        <div class="kom-stat stat-wa">100.000+ Anggota Aktif</div>
+        <a href="https://whatsapp.com/channel/0029VaehXQN11ulKVmiH0F1u" target="_blank" class="btn-kom btn-wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Bergabung Sekarang
+        </a>
+      </div>
+      <div class="kom-card kom-trakteer">
+        <div class="kom-icon icon-tr">☕</div>
+        <div class="kom-title">Dukung di Trakteer</div>
+        <div class="kom-desc">Konten kami selalu gratis. Kalau merasa terbantu, kamu bisa mendukung kami agar terus berkarya untuk pelaut Indonesia.</div>
+        <div class="kom-stat stat-tr">Setiap dukungan berarti besar</div>
+        <a href="https://trakteer.id/dailylokerpelaut" target="_blank" class="btn-kom btn-tr">
+          ☕ Trakteer Kami
+        </a>
+      </div>
+      <div class="kom-card kom-survey">
+        <div class="kom-icon icon-sv">📊</div>
+        <div class="kom-title">Ikut Survey Kami</div>
+        <div class="kom-desc">Bantu kami memahami kebutuhan pelaut Indonesia lebih dalam. Data survey digunakan untuk membuat konten dan produk yang lebih baik.</div>
+        <div class="kom-stat stat-sv">1200+ Pelaut Sudah Mengisi</div>
+        <a href="https://forms.gle/i7x2tg28K2dg3b5Q6" target="_blank" class="btn-kom btn-sv">
+          📋 Isi Survey — 2 Menit
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KONTAK ── -->
+<section class="sec" id="kontak">
+  <div class="wrap">
+    <div class="sec-eyebrow"><div class="eyebrow-dash"></div><div class="eyebrow-txt">Hubungi Kami</div></div>
+    <h2 >Ada yang bisa kami bantu?</h2>
+    <div class="kontak-grid">
+      <div class="kontak-left">
+        <p>Kami terbuka untuk berbagai bentuk kolaborasi dan kerjasama — baik dari perusahaan pelayaran, manning agency, crewing agency, maupun institusi pendidikan maritim yang ingin menjangkau komunitas pelaut Indonesia.</p>
+        <p>Untuk pelaut yang membutuhkan bantuan seputar karir, lowongan, atau produk kami — silakan kirim pesan melalui form atau langsung via email.</p>
+        <div class="kontak-cards">
+          <a href="mailto:dailylokerpelaut@gmail.com" class="kontak-card">
+            <div class="kc-icon kc-email">✉️</div>
+            <div>
+              <div class="kc-label">Email Umum</div>
+              <div class="kc-value">dailylokerpelaut@gmail.com</div>
+              <div class="kc-note">Untuk pertanyaan umum, pembelian buku, dan komunitas</div>
+            </div>
+          </a>
+          <a href="mailto:dailylokerpelaut@gmail.com" class="kontak-card">
+            <div class="kc-icon kc-email">🤝</div>
+            <div>
+              <div class="kc-label">Kerjasama & Loker</div>
+              <div class="kc-value">dailylokerpelaut@gmail.com</div>
+              <div class="kc-note">Untuk manning agency & crewing yang ingin kirim loker atau berkolaborasi</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div >
+        <div class="kontak-form">
+          <h3>Kirim Pesan</h3>
+          <p>Isi form di bawah dan kami akan membalas dalam 1×24 jam kerja.</p>
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input id="f-nama" type="text" placeholder="Nama kamu atau nama perusahaan">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input id="f-email" type="email" placeholder="email@perusahaan.com">
+          </div>
+          <div class="form-group">
+            <label>Keperluan</label>
+            <select id="f-keperluan">
+              <option value="">-- Pilih keperluan --</option>
+              <option>Kirim Lowongan Kapal</option>
+              <option>Kerjasama Manning/Crewing Agency</option>
+              <option>Sponsorship & Iklan</option>
+              <option>Pertanyaan Produk / Buku</option>
+              <option>Kolaborasi Konten</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Pesan</label>
+            <textarea id="f-pesan" placeholder="Ceritakan kebutuhan atau pertanyaan kamu..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="handleSubmit(event)">Kirim Pesan →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-in">
+      <div class="footer-logo">Daily Loker <span>Pelaut</span></div>
+      <div class="footer-links">
+        <a href="#beranda">Beranda</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#buku">Buku</a>
+        <a href="#komunitas">Komunitas</a>
+        <a href="#kontak">Kontak</a>
+        <a href="https://whatsapp.com/channel/0029VaehXQN11ulKVmiH0F1u" target="_blank">WA Channel</a>
+        <a href="https://trakteer.id/dailylokerpelaut" target="_blank">Trakteer</a>
+
+      </div>
+      <div class="footer-copy">© 2025 Daily Loker Pelaut · dailylokerpelaut.com · Komunitas Pelaut Indonesia</div>
+    </div>
+  </div>
+
+<!-- ── MARKETPLACE FOOTER ── -->
+<div style="background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.07);padding:24px 0">
+  <div class="wrap">
+    <p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:16px">Temukan kami di</p>
+    <div class="mkt-footer-row" style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <a href="https://vt.tiktok.com/ZSHWnMQFP/?page=Mall" target="_blank" title="TikTok Shop" style="display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 18px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.borderColor='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.18 8.18 0 004.78 1.52V6.73a4.85 4.85 0 01-1.01-.04z"/></svg>
+        <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.75)">TikTok Shop</span>
+      </a>
+      <a href="https://id.shp.ee/br73rhs" target="_blank" title="Shopee" style="display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 18px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(238,77,45,0.15)';this.style.borderColor='rgba(238,77,45,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ee4d2d"><path d="M19 7h-1.26A4 4 0 0012 4a4 4 0 00-5.74 3H5a2 2 0 00-2 2v11a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2zM12 6a2 2 0 012 2H10a2 2 0 012-2zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.75)">Shopee</span>
+      </a>
+      <a href="https://tk.tokopedia.com/ZSHWnxabj/" target="_blank" title="Tokopedia" style="display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 18px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='rgba(66,181,73,0.15)';this.style.borderColor='rgba(66,181,73,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#42b549"><path d="M6 2l1.5 9h9L18 2zm0 0H4M18 2h2M9 13v7m6-7v7M3 20h18" stroke="#42b549" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.75)">Tokopedia</span>
+      </a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script>
+/* Nav scroll */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.boxShadow=scrollY>20?'0 2px 20px rgba(14,26,18,0.08)':'none';
+});
+
+/* Mobile menu */
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* Scroll animations */
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('const subject=encodeURIComponent('['+keperluan+'] dari '+nama);
+  const body=encodeURIComponent('Nama: '+nama+'\nEmail: '+email+'\nKeperluan: '+keperluan+'\n\nPesan:\n'+pesan);
+  window.location.href='mailto:dailylokerpelaut@gmail.com?subject='+subject+'&body='+body;
+  const btn=e.target;
+  btn.textContent='✓ Membuka aplikasi email...';
+  btn.style.background='var(--green)';
+  setTimeout(()=>{btn.textContent='Kirim Pesan →';btn.style.background='';},4000);
+}
+</script>
+</body>
+</html>
