@@ -140,6 +140,29 @@ document.addEventListener('DOMContentLoaded', async function() {
     // preserve ordering (React before ReactDOM before Babel before text/babel).
     const doc = new DOMParser().parseFromString(template, 'text/html');
     document.documentElement.replaceWith(doc.documentElement);
+
+    // Daily Loker Pelaut GA4 tracking
+    // Measurement ID: G-NR05C7B09B
+    (function installDLPGA4(){
+      if (window.__DLP_GA4_INSTALLED__) return;
+      window.__DLP_GA4_INSTALLED__ = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+
+      const gaScript = document.createElement("script");
+      gaScript.async = true;
+      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-NR05C7B09B";
+      document.head.appendChild(gaScript);
+
+      window.gtag("js", new Date());
+      window.gtag("config", "G-NR05C7B09B", {
+        page_title: document.title,
+        page_location: window.location.href,
+        send_page_view: true
+      });
+    })();
+
     const dead = Array.from(document.scripts);
     for (const old of dead) {
       const s = document.createElement('script');
